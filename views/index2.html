@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=UTF-8"/>
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+		<title>新建计划</title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="static/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css"/>
+		<script src="static/js/jquery.mobile-1.4.5/demos/js/jquery.mobile-1.4.5.min.js"></script>
+	<style type="text/css">
+		
+	</style>
+		<script>
+        function add() {
+            var xc = $("#xc").val();
+                $.get("insert", { xc: xc }, function() {
+                    alert("添加成功");
+					window.location.href="/";
+                });
+            }
+        </script>
+	</head>
+            <body>
+                <div id="· data-role="page"  >
+                <form id="form1" class="login-form"  action="update" method="post" >
+                  <textarea id="xc"  cols="2" rows="10"  name = "mydiary" placeholder="行程" ></textarea>
+                  <button onclick="add()"  >添      加</button>
+                </form>
+                    
+                    </div>
+                </div>
+            </body>
+            </html>

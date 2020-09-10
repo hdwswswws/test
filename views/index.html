@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=UTF-8"/>
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+		<title>我的计划</title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="static/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css"/>
+		<script src="static/js/jquery.mobile-1.4.5/demos/js/jquery.mobile-1.4.5.min.js"></script>
+	<style type="text/css">
+		
+	</style>
+		<script>
+          var xhr=new XMLHttpRequest();
+		  xhr.open("get","index");
+		  xhr.onreadystatechange=function(){
+			  if(xhr.readyState==4&&xhr.status==200){
+				var data=xhr.responseText
+			    var obj=JSON.parse(xhr.responseText);
+				for (var i = 0; i < obj.length; i++) {
+					var str =obj[i].State.toString();
+					if(str=="未完成")
+					{
+					$("#xc1").append("<li style='height:100%;''><h1  style='margin: 15px 0px 0px 10px;height: 30px;'>"+obj[i].Journey+"</h1><button onclick='up("+obj[i].Id+")'style='margin: 15px 0px 0px 10px;height: 30px;'>完成</button><button onclick='del("+obj[i].Id+")'style='margin: 15px 0px 0px 10px;height: 30px;'>删除</button></li>");
+					}
+					if(str=="已完成")
+					{
+					$("#xc2").append("<li style='height:100%;''><h1  style='margin: 15px 0px 0px 10px;height: 30px;'>"+obj[i].Journey+"</h1><button onclick='del("+obj[i].Id+")'style='margin: 15px 0px 0px 10px;height: 30px;'>删除</button></li>");
+					}
+				}
+		  }
+		  };
+		  xhr.send(null);
+		  function del(id) {
+                $.get("del", { id: id }, function() {
+                    alert("删除成功");
+					window.location.href="/";
+                });
+            }
+			function up(id) {
+                $.get("up", { id: id }, function() {
+                    alert("更新成功");
+					window.location.href="/";
+                });
+            }
+        </script>
+	</head>
+	<body>
+		<div id="· data-role="page"  >
+			<div data-role="panel" id="myfriends" data-display="overlay" data-position="right">
+			</div>
+			<div id="header1" data-role="header"style="background: #00A0DF;">
+				<h1>我的文章</h1>
+			</div>
+			<div id="content1" data-role="content" data-theme="a">
+			<form class="ui-filterable">
+			    <input id="hd" data-type="search" placeholder="根据名称搜索..">
+      </form>
+      <div id="content1" data-role="content" data-theme="a">
+				<div id="sc1" data-role="collapsible">
+					<h1 id="sc">未完成</h1>
+          <ul id="xc1" data-role="listview"  data-filter="true" data-input="#hd" >
+ 
+            </ul>
+			</div>
+          <div id="sc2" data-role="collapsible">
+					<h1 id="sc">已完成</h1>
+             <ul id="xc2"data-role="listview"  data-filter="true" data-input="#hd" >
+           
+            </ul>
+			</div>
+			</div>
+			<div id="footer1" data-role="footer" data-position="fixed">
+				<div data-role="navbar" data-iconpos="left">
+					<ul>
+					    <li><a href="/" target="_top" data-icon="home" >主页</a></li>
+						 <li><a href="index2" target="_top" data-icon="plus" >新建计划</a></li>
+					</ul>
+				</div>
+		    </div>
+		</div>
+
+	</body>
+	</html>
